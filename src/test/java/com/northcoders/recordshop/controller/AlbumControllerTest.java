@@ -47,4 +47,18 @@ class AlbumControllerTest {
         assert result.size() == 2;
         verify(albumRepository, times(1)).findAll();
     }
+
+    @Test
+    void testGetAlbumById() {
+        Album album = new Album();
+        album.setId(1L);
+        album.setName("Album 1");
+        album.setDescription("Album 1 description");
+
+        when(albumRepository.findById(1L)).thenReturn(java.util.Optional.of(album));
+
+        Album result = albumService.getAlbumById("1");
+        assert result.getId() == 1L;
+        verify(albumRepository, times(1)).findById(1L);
+    }
 }

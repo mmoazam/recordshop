@@ -21,4 +21,10 @@ public class AlbumService implements IAlbumService {
     public List<Album> getAllAlbums() {
         return albumRepository.findAll();
     }
+
+
+    @Override
+    public Album getAlbumById(String number) {
+        return albumRepository.findById(Long.parseLong(number)).orElse(null);
+    }
 }
