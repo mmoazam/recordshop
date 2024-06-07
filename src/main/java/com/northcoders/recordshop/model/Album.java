@@ -23,8 +23,9 @@ public class Album {
 
     private String description;
 
-    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Artist> artists;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "artist_id", referencedColumnName = "id")
+    private Artist artist;
 
     @Enumerated(EnumType.STRING)
     private Genre genre;

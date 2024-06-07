@@ -22,8 +22,7 @@ public class Artist {
 
     private String Description;
 
-    @ManyToOne
-    @JoinColumn(name = "album_id")
+    @OneToOne(mappedBy = "artist")
     private Album album;
 
 }
