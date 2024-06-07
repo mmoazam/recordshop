@@ -25,6 +25,7 @@ public class Album {
     @OneToMany(mappedBy = "album")
     private List<Artist> artists;
 
+    @Enumerated(EnumType.STRING)
     private Genre genre;
 
     private int releaseYear;

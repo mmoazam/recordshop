@@ -20,7 +20,6 @@ public class Artist {
 
     private String Description;
 
-
     @ManyToOne
     @JoinColumn(name = "album_id", nullable = false)
     private Album album;
