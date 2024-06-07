@@ -1,7 +1,9 @@
 package com.northcoders.recordshop;
 
+import com.northcoders.recordshop.model.Album;
 import com.northcoders.recordshop.model.Artist;
 import com.northcoders.recordshop.model.Genre;
+import com.northcoders.recordshop.repository.IAlbumRepository;
 import com.northcoders.recordshop.repository.IArtistRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -30,6 +32,18 @@ public class RecordShopApplication {
 			artistRepository.save(new Artist(11L,"Red Hot Chili Peppers","The best band ever!",null));
 			artistRepository.save(new Artist(12L,"The Beatles","The best band ever!",null));
 		});
+	}
+
+	@Bean
+	public CommandLineRunner loadGenres(IAlbumRepository albumRepository) {
+		return (args) -> {
+			albumRepository.save(new Album(1L, "The Wall", "The best album ever!",null, Genre.ROCK, 1979, 100));
+			albumRepository.save(new Album(2L, "Led Zeppelin IV", "The best album ever!",null, Genre.ROCK, 1971, 100));
+			albumRepository.save(new Album(3L, "Abbey Road", "The best album ever!",null, Genre.ROCK, 1969, 100));
+			albumRepository.save(new Album(4L, "The Doors", "The best album ever!",null, Genre.ROCK, 1967, 100));
+			albumRepository.save(new Album(5L, "Abbey Road", "The best album ever!",null, Genre.ROCK, 1969, 100));
+			albumRepository.save(new Album(6L, "The Doors", "The best album ever!",null, Genre.ROCK, 1967, 100));
+		};
 	}
 }
 
