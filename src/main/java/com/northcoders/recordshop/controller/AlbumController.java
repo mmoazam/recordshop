@@ -1,10 +1,7 @@
 package com.northcoders.recordshop.controller;
 
 import com.northcoders.recordshop.model.Album;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +21,12 @@ public class AlbumController {
         return new Album();
     }
 
+    @PostMapping("")
+    public Album createAlbum(
+            @RequestBody Album album
+    ) {
+        return album;
+    }
 
 
 } // end of AlbumController

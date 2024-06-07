@@ -9,4 +9,6 @@ public interface IAlbumService {
     List<Album> getAllAlbums();
 
     Album getAlbumById(String number);
+
+    Album createAlbum(Album album);
 }

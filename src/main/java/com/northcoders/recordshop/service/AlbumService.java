@@ -27,4 +27,9 @@ public class AlbumService implements IAlbumService {
     public Album getAlbumById(String number) {
         return albumRepository.findById(Long.parseLong(number)).orElse(null);
     }
+
+    @Override
+    public Album createAlbum(Album album) {
+        return albumRepository.save(album);
+    }
 }

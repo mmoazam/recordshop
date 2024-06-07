@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 
@@ -61,4 +62,19 @@ class AlbumControllerTest {
         assert result.getId() == 1L;
         verify(albumRepository, times(1)).findById(1L);
     }
-}
+
+    @Test
+    void testCreateAlbum() {
+        Album album = new Album();
+        album.setId(1L);
+        album.setName("Album 1");
+        album.setDescription("Album 1 description");
+
+        when(albumRepository.save(album)).thenReturn(album);
+
+        Album result = albumService.createAlbum(album);
+        assert result.getId() == 1L;
+        verify(albumRepository, times(1)).save(album);
+    }
+
+}// end of class
