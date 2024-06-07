@@ -21,4 +21,6 @@ public class Album {
     private String name;
     private String description;
 
+    private Genre genre;
+
 }
