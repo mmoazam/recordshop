@@ -1,18 +1,16 @@
 package com.northcoders.recordshop.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "albums")
 public class Album {
     @Id
@@ -23,9 +21,7 @@ public class Album {
 
     private String description;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "artist_id", referencedColumnName = "id")
-    private Artist artist;
+    private String artist;
 
     @Enumerated(EnumType.STRING)
     private Genre genre;

@@ -1,18 +1,19 @@
 package com.northcoders.recordshop.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.List;
 
 @Entity
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "artists")
 public class Artist {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -21,8 +22,4 @@ public class Artist {
     private String name;
 
     private String Description;
-
-    @OneToOne(mappedBy = "artist")
-    private Album album;
-
 }

@@ -4,6 +4,7 @@ import com.northcoders.recordshop.model.Album;
 import com.northcoders.recordshop.repository.IAlbumRepository;
 import com.northcoders.recordshop.service.IAlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,6 +28,34 @@ public class AlbumController {
         return  albumService.getAlbumById(id);
     }
 
+    @GetMapping("/name/{name}")
+    public List<Album> getAlbumByName(
+            @PathVariable("name") String name
+    ) {
+        return  albumService.getAlbumByName(name);
+    }
+
+    @GetMapping("/name/artist/{name}")
+    public List<Album> getAlbumByArtistName(
+            @PathVariable("name") String name
+    ) {
+        return  albumService.getAlbumByArtist(name);
+    }
+
+    @GetMapping("/year/{year}")
+    public List<Album> getAlbumByReleaseYear(
+            @PathVariable("year") int year
+    ) {
+        return  albumService.getAlbumByReleaseYear(year);
+    }
+
+    @GetMapping("/genre/{genre}")
+    public List<Album> getAlbumByGenre(
+            @PathVariable("genre") String genre
+    ) {
+        return  albumService.getAlbumByGenre(genre.toUpperCase());
+    }
+
     @PostMapping("")
     public Album createAlbum(
             @RequestBody Album album
@@ -34,5 +63,16 @@ public class AlbumController {
         return albumService.createAlbum(album);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Album> deleteAlbum(
+            @PathVariable("id") String id
+    ) {
+        // check if id is integer
+        if (!id.matches("[0-9]+")) {
+            return null;
+        }
+        albumService.deleteAlbumById(id);
 
+        return null;
+    }
 } // end of AlbumController

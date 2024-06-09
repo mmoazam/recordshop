@@ -18,32 +18,13 @@ public class RecordShopApplication {
 	}
 
 	@Bean
-	public CommandLineRunner loadArtists(IArtistRepository artistRepository) {
-		return (args -> {
-			artistRepository.save(new Artist(1L,"Pink Floyd", "The best band ever!",null));
-			artistRepository.save(new Artist(2L,"The Rolling Stones","The best band ever!",null));
-			artistRepository.save(new Artist(3L,"Led Zeppelin","The best band ever!",null));
-			artistRepository.save(new Artist(4L,"AC/DC","The best band ever!",null));
-			artistRepository.save(new Artist(6L,"The Doors","The best band ever!",null));
-			artistRepository.save(new Artist(7L,"Queen","The best band ever!",null));
-			artistRepository.save(new Artist(8L,"Eagles","The best band ever!",null));
-			artistRepository.save(new Artist(9L,"Nirvana","The best band ever!",null));
-			artistRepository.save(new Artist(10L,"Pearl Jam","The best band ever!",null));
-			artistRepository.save(new Artist(11L,"Red Hot Chili Peppers","The best band ever!",null));
-			artistRepository.save(new Artist(12L,"The Beatles","The best band ever!",null));
-		});
-	}
-
-	@Bean
-	public CommandLineRunner loadGenres(IAlbumRepository albumRepository) {
-		return (args) -> {
-			albumRepository.save(new Album(1L, "The Wall", "The best album ever!",null, Genre.ROCK, 1979, 100));
-			albumRepository.save(new Album(2L, "Led Zeppelin IV", "The best album ever!",null, Genre.ROCK, 1971, 100));
-			albumRepository.save(new Album(3L, "Abbey Road", "The best album ever!",null, Genre.ROCK, 1969, 100));
-			albumRepository.save(new Album(4L, "The Doors", "The best album ever!",null, Genre.ROCK, 1967, 100));
-			albumRepository.save(new Album(5L, "Abbey Road", "The best album ever!",null, Genre.ROCK, 1969, 100));
-			albumRepository.save(new Album(6L, "The Doors", "The best album ever!",null, Genre.ROCK, 1967, 100));
+	CommandLineRunner runner(IAlbumRepository albumRepository) {
+		return args -> {
+			albumRepository.save(new Album(1L,"Album 1", "Album 1 description", "Artist 1", Genre.ROCK, 2020, 10));
+			albumRepository.save(new Album(2L,"Album 2", "Album 2 description", "Artist 2", Genre.POP, 2010, 10));
+			albumRepository.save(new Album(3L,"Album 3", "Album 3 description", "Artist 3", Genre.COUNTRY, 2000, 10));
+			albumRepository.save(new Album(4L,"Album 4", "Album 4 description", "Artist 4", Genre.BLUES, 1990, 10));
 		};
 	}
-}
+}// end of class
 
