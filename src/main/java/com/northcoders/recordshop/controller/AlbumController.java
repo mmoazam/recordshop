@@ -61,6 +61,13 @@ public class AlbumController {
         return  albumService.getAllAlbumsInStock();
     }
 
+    @GetMapping("/stock_level_below/{stock_level}")
+    public List<Album> getAlbumsByStockLevelBelow(
+            @PathVariable("stock_level") int stock_level
+    ) {
+        return  albumService.getAlbumsWithStockLevelLessThan(stock_level);
+    }
+
     @PostMapping("")
     public Album createAlbum(
             @RequestBody Album album

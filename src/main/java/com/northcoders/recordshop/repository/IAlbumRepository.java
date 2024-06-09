@@ -18,8 +18,7 @@ public interface IAlbumRepository extends JpaRepository<Album, Long> {
 
     List<Album> findByGenre(Genre genre);
 
-
     List<Album> findByStockLevelGreaterThan(int stockLevel);
 
-    List<Album> findByStockLevel(int stockLevel);
+    List<Album> findByStockLevelLessThan(int stockLevel);
 }

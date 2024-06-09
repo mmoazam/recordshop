@@ -27,6 +27,8 @@ public interface IAlbumService {
     void deleteAlbumById(String id);
 
     List<Album> getAllAlbumsInStock();
+
+    List<Album> getAlbumsWithStockLevelLessThan(int level);
 }
 
 /*

@@ -74,4 +74,9 @@ public class AlbumService implements IAlbumService {
     public List<Album> getAllAlbumsInStock() {
         return albumRepository.findByStockLevelGreaterThan(0);
     }
+
+    @Override
+    public List<Album> getAlbumsWithStockLevelLessThan(int level) {
+        return albumRepository.findByStockLevelLessThan(level);
+    }
 }
