@@ -25,10 +25,7 @@ public class AlbumService implements IAlbumService {
         return albumRepository.findAll();
     }
 
-    @Override
-    public List<Album> getAllAlbumsInStock() {
-        return List.of();
-    }
+
 
 
     @Override
@@ -71,5 +68,10 @@ public class AlbumService implements IAlbumService {
     @Override
     public void deleteAlbumById(String id) {
          albumRepository.deleteById(Long.parseLong(id));
+    }
+
+    @Override
+    public List<Album> getAllAlbumsInStock() {
+        return albumRepository.findByStockLevelGreaterThan(0);
     }
 }

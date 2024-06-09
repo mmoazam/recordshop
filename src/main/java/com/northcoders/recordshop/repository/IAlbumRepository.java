@@ -17,4 +17,9 @@ public interface IAlbumRepository extends JpaRepository<Album, Long> {
     List<Album> findByReleaseYear(int year);
 
     List<Album> findByGenre(Genre genre);
+
+
+    List<Album> findByStockLevelGreaterThan(int stockLevel);
+
+    List<Album> findByStockLevel(int stockLevel);
 }

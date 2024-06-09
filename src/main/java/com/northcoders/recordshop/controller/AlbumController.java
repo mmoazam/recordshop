@@ -56,6 +56,11 @@ public class AlbumController {
         return  albumService.getAlbumByGenre(genre.toUpperCase());
     }
 
+    @GetMapping("/in_stock")
+    public List<Album> getAlbumsInStock() {
+        return  albumService.getAllAlbumsInStock();
+    }
+
     @PostMapping("")
     public Album createAlbum(
             @RequestBody Album album

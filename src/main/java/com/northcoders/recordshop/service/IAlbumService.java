@@ -10,8 +10,6 @@ public interface IAlbumService {
 
     List<Album> getAllAlbums();
 
-    List<Album> getAllAlbumsInStock();
-
     Album getAlbumById(String number);
 
     Album createAlbum(Album album);
@@ -26,9 +24,9 @@ public interface IAlbumService {
 
     Album updateAlbum(Album album);
 
-    // delete album by ID
     void deleteAlbumById(String id);
 
+    List<Album> getAllAlbumsInStock();
 }
 
 /*
