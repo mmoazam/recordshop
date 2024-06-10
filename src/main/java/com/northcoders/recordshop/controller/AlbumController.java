@@ -24,22 +24,15 @@ public class AlbumController {
         return albumService.getAllAlbums();
     } // end of getAllAlbums
 
+
     @GetMapping("/{id}")
-    public Album getAlbumById(
+    public ResponseEntity<Album> getAlbumById(
             @PathVariable("id") String id
     ) {
-        return  albumService.getAlbumById(id);
+        Album album = albumService.getAlbumById(id);
+
+        return ResponseEntity.ok(album);
     }
-
-
-    //////////////////////////////////
-
-
-
-
-
-
-    ///////////////////////////////////
 
 
     @GetMapping("/name/{name}")

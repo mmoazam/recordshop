@@ -1,5 +1,6 @@
 package com.northcoders.recordshop.service;
 
+import com.northcoders.recordshop.exception.ResourceNotFoundException;
 import com.northcoders.recordshop.model.Album;
 import com.northcoders.recordshop.model.Genre;
 import com.northcoders.recordshop.repository.IAlbumRepository;
@@ -28,7 +29,7 @@ public class AlbumService implements IAlbumService {
 
     @Override
     public Album getAlbumById(String number) {
-        return albumRepository.findById(Long.parseLong(number)).orElseThrow(() -> new IllegalArgumentException("Album with Id " + number + " not found"));
+        return albumRepository.findById(Long.parseLong(number)).orElseThrow(() -> new ResourceNotFoundException("Album with Id " + number + " not found"));
     }
 
     @Override
