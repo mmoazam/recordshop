@@ -1,14 +1,10 @@
 package com.northcoders.recordshop.controller;
 
 import com.northcoders.recordshop.model.Album;
-import com.northcoders.recordshop.repository.IAlbumRepository;
 import com.northcoders.recordshop.service.IAlbumService;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -38,48 +34,48 @@ public class AlbumController {
     public List<Album> getAlbumByName(
             @PathVariable("name") String name
     ) {
-        return  albumService.getAlbumByName(name);
+        return albumService.getAlbumByName(name);
     }
 
     @GetMapping("/name/artist/{name}")
     public List<Album> getAlbumByArtistName(
             @PathVariable("name") String name
     ) {
-        return  albumService.getAlbumByArtist(name);
+        return albumService.getAlbumByArtist(name);
     }
 
     @GetMapping("/year/{year}")
     public List<Album> getAlbumByReleaseYear(
             @PathVariable("year") int year
     ) {
-        return  albumService.getAlbumByReleaseYear(year);
+        return albumService.getAlbumByReleaseYear(year);
     }
 
     @GetMapping("/genre/{genre}")
     public List<Album> getAlbumByGenre(
             @PathVariable("genre") String genre
     ) {
-        return  albumService.getAlbumByGenre(genre.toUpperCase());
+        return albumService.getAlbumByGenre(genre.toUpperCase());
     }
 
     @GetMapping("/stock")
     public List<Album> getAlbumsInStock() {
-        return  albumService.getAllAlbumsInStock();
+        return albumService.getAllAlbumsInStock();
     }
 
     @GetMapping("/stock_level_below/{stock_level}")
     public List<Album> getAlbumsByStockLevelBelow(
             @PathVariable("stock_level") int stock_level
     ) {
-        return  albumService.getAlbumsWithStockLevelLessThan(stock_level);
+        return albumService.getAlbumsWithStockLevelLessThan(stock_level);
     }
 
 
     @GetMapping("/stock/")
     public List<Album> getAlbumsByStockLevelAbove(
-            @RequestParam("stock_level_above" ) int stock_level_above
+            @RequestParam("stock_level_above") int stock_level_above
     ) {
-        return  albumService.getAlbumsWithStockLevelGreaterThan(stock_level_above);
+        return albumService.getAlbumsWithStockLevelGreaterThan(stock_level_above);
     }
 
     @PostMapping("")
@@ -97,11 +93,29 @@ public class AlbumController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("")
-    public Album updateAlbum(
-            @RequestBody Album album
+    @PutMapping("/{id}")
+    public ResponseEntity<Album> updateAlbum(
+            @PathVariable("id") long id,
+            @RequestBody Album albumDetails
     ) {
-        return albumService.updateAlbum(album);
+        Album album = albumService.getAlbumById(id);
+
+        if (albumDetails.getName() != null) {
+            album.setName(albumDetails.getName());
+        }
+        if (albumDetails.getArtist() != null) {
+            album.setArtist(albumDetails.getArtist());
+        }
+
+        album.setReleaseYear(albumDetails.getReleaseYear());
+
+        album.setGenre(albumDetails.getGenre());
+
+        if (albumDetails.getStockLevel() >= 0) {
+            album.setStockLevel(albumDetails.getStockLevel());
+        }
+
+        return ResponseEntity.ok(albumService.addOrUpdateAlbum(album));
     }
 
 
