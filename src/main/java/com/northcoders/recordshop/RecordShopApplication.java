@@ -26,6 +26,7 @@ public class RecordShopApplication {
 			albumRepository.save(new Album(4L,"Album 4", "Album 4 description", "Artist 4", Genre.BLUES, 1990, 16));
 			albumRepository.save(new Album(5L,"Country 5", "Mountains and Trees", "JOhn Denver", Genre.COUNTRY, 1980, 1));
 			albumRepository.save(new Album(6L,"Rubbish Vol 7", "Music of the 2000 and beyond", "All of them", Genre.HIPHOP, 2000, 100));
+			albumRepository.save(new Album(7L,"Rubbish Vol 8", "Music of the 2000 and beyond", "All of them", Genre.HIPHOP, 2000, 100));
 		};
 	}
 }// end of class

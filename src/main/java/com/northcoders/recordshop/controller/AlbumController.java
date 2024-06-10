@@ -18,8 +18,9 @@ public class AlbumController {
     IAlbumService albumService;
 
     @GetMapping("")
-    public List<Album> getAllAlbums() {
-        return albumService.getAllAlbums();
+    public ResponseEntity<List<Album>> getAllAlbums() {
+        List<Album> albums = albumService.getAllAlbums();
+        return ResponseEntity.ok(albums);
     } // end of getAllAlbums
 
 
@@ -33,58 +34,59 @@ public class AlbumController {
 
 
     @GetMapping("/name/{name}")
-    public List<Album> getAlbumByName(
+    public ResponseEntity<List<Album>> getAlbumByName(
             @PathVariable("name") String name
     ) {
-        return albumService.getAlbumByName(name);
+       List<Album> albums = albumService.getAlbumByName(name);
+       return ResponseEntity.ok(albums);
     }
 
     @GetMapping("/name/artist/{name}")
-    public List<Album> getAlbumByArtistName(
+    public ResponseEntity<List<Album>> getAlbumByArtistName(
             @PathVariable("name") String name
     ) {
-        return albumService.getAlbumByArtist(name);
+         return ResponseEntity.ok(albumService.getAlbumByArtist(name));
     }
 
     @GetMapping("/year/{year}")
-    public List<Album> getAlbumByReleaseYear(
+    public ResponseEntity<List<Album>> getAlbumByReleaseYear(
             @PathVariable("year") int year
     ) {
-        return albumService.getAlbumByReleaseYear(year);
+        return ResponseEntity.ok(albumService.getAlbumByReleaseYear(year));
     }
 
     @GetMapping("/genre/{genre}")
-    public List<Album> getAlbumByGenre(
+    public ResponseEntity<List<Album>> getAlbumByGenre(
             @PathVariable("genre") String genre
     ) {
-        return albumService.getAlbumByGenre(genre.toUpperCase());
+        return ResponseEntity.ok(albumService.getAlbumByGenre(genre.toUpperCase()));
     }
 
     @GetMapping("/stock")
-    public List<Album> getAlbumsInStock() {
-        return albumService.getAllAlbumsInStock();
+    public ResponseEntity<List<Album>>getAlbumsInStock() {
+        return ResponseEntity.ok().body(albumService.getAllAlbumsInStock());
     }
 
     @GetMapping("/stock_level_below/{stock_level}")
-    public List<Album> getAlbumsByStockLevelBelow(
+    public ResponseEntity<List<Album>> getAlbumsByStockLevelBelow(
             @PathVariable("stock_level") int stock_level
     ) {
-        return albumService.getAlbumsWithStockLevelLessThan(stock_level);
+        return ResponseEntity.ok().body(albumService.getAlbumsWithStockLevelLessThan(stock_level));
     }
 
 
     @GetMapping("/stock/")
-    public List<Album> getAlbumsByStockLevelAbove(
+    public ResponseEntity<List<Album>> getAlbumsByStockLevelAbove(
             @RequestParam("stock_level_above") int stock_level_above
     ) {
-        return albumService.getAlbumsWithStockLevelGreaterThan(stock_level_above);
+        return ResponseEntity.ok().body(albumService.getAlbumsWithStockLevelGreaterThan(stock_level_above));
     }
 
     @PostMapping("")
-    public Album addOrUpdateAlbum(
+    public ResponseEntity<Album>  addOrUpdateAlbum(
             @RequestBody Album album
     ) {
-        return albumService.addOrUpdateAlbum(album);
+        return ResponseEntity.ok().body(albumService.addOrUpdateAlbum(album));
     }
 
     @DeleteMapping("/{id}")

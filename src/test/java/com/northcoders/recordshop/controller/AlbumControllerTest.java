@@ -58,7 +58,7 @@ class AlbumControllerTest {
 
         when(albumRepository.findById(1L)).thenReturn(java.util.Optional.of(album));
 
-        Album result = albumService.getAlbumById("1");
+        Album result = albumService.getAlbumById(1L);
         assert result.getId() == 1L;
         verify(albumRepository, times(1)).findById(1L);
     }
