@@ -25,8 +25,6 @@ public class AlbumService implements IAlbumService {
     }
 
 
-
-
     @Override
     public Album getAlbumById(long number) {
         return albumRepository.findById(number).orElseThrow(() -> new ResourceNotFoundException("Album with Id " + number + " not found"));
@@ -65,8 +63,11 @@ public class AlbumService implements IAlbumService {
 
     // delete album by ID
     @Override
-    public void deleteAlbumById(String id) {
-         albumRepository.deleteById(Long.parseLong(id));
+    public void deleteAlbumById(long id) {
+        if (!albumRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Album with Id " + id + " not found");
+        }
+        albumRepository.deleteById(id);
     }
 
     @Override

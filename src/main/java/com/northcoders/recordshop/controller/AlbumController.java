@@ -90,16 +90,11 @@ public class AlbumController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Album> deleteAlbum(
-            @PathVariable("id") String id
+    public ResponseEntity<Album> deleteAlbumById(
+            @PathVariable("id") long id
     ) {
-        // check if id is integer
-        if (!id.matches("[0-9]+")) {
-            return null;
-        }
         albumService.deleteAlbumById(id);
-
-        return null;
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("")

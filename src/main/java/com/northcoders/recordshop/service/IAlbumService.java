@@ -22,7 +22,7 @@ public interface IAlbumService {
 
     Album updateAlbum(Album album);
 
-    void deleteAlbumById(String id);
+    void deleteAlbumById(long id);
 
     List<Album> getAllAlbumsInStock();
 
