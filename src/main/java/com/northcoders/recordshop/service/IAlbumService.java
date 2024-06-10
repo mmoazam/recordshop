@@ -8,7 +8,7 @@ public interface IAlbumService {
 
     List<Album> getAllAlbums();
 
-    Album getAlbumById(String number);
+    Album getAlbumById(long number);
 
     Album createAlbum(Album album);
 
