@@ -2,8 +2,11 @@ package com.northcoders.recordshop.service;
 
 import com.northcoders.recordshop.exception.BadRequestException;
 import com.northcoders.recordshop.model.Album;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public interface IAlbumService {
 
@@ -34,4 +37,6 @@ public interface IAlbumService {
     Album addOrUpdateAlbum(Album album);
 
 
+    @Transactional
+    Optional<Album> updateAlbum(Long id, Map<String, Object> updates);
 }
