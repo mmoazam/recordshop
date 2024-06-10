@@ -3,7 +3,6 @@ package com.northcoders.recordshop.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
 
 @Entity
 @NoArgsConstructor

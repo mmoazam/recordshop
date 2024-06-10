@@ -1,5 +1,6 @@
 package com.northcoders.recordshop.controller;
 
+import com.northcoders.recordshop.exception.ResourceNotFoundException;
 import com.northcoders.recordshop.model.Album;
 import com.northcoders.recordshop.repository.IAlbumRepository;
 import com.northcoders.recordshop.service.AlbumService;
@@ -12,7 +13,10 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class AlbumControllerTest {
@@ -77,6 +81,44 @@ class AlbumControllerTest {
         verify(albumRepository, times(1)).save(album);
     }
 
+    @Test
+    void getAlbumById_AlbumDoesNotExist() {
+        when(albumRepository.findById(1L)).thenReturn(Optional.empty());
 
+        assertThrows(ResourceNotFoundException.class, () -> albumService.getAlbumById(1L));
+    }
+
+    @Test
+    void addOrUpdateAlbum() {
+        Album album = new Album();
+        album.setId(1L);
+        album.setName("Album1");
+        album.setReleaseYear(2000);
+        album.setStockLevel(10);
+
+        when(albumRepository.save(any(Album.class))).thenReturn(album);
+
+        Album savedAlbum = albumService.addOrUpdateAlbum(album);
+        assertNotNull(savedAlbum);
+        assertEquals("Album1", savedAlbum.getName());
+        verify(albumRepository, times(1)).save(album);
+    }
+
+
+    @Test
+    void deleteAlbum_AlbumExists() {
+        when(albumRepository.existsById(1L)).thenReturn(true);
+        doNothing().when(albumRepository).deleteById(1L);
+
+        albumService.deleteAlbumById(1L);
+        verify(albumRepository, times(1)).deleteById(1L);
+    }
+
+    @Test
+    void deleteAlbum_AlbumDoesNotExist() {
+        when(albumRepository.existsById(1L)).thenReturn(false);
+
+        assertThrows(ResourceNotFoundException.class, () -> albumService.deleteAlbumById(1L));
+    }
 
 }// end of class

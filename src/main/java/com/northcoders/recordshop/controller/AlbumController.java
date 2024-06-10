@@ -3,6 +3,7 @@ package com.northcoders.recordshop.controller;
 import com.northcoders.recordshop.model.Album;
 import com.northcoders.recordshop.service.IAlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -86,7 +87,8 @@ public class AlbumController {
     public ResponseEntity<Album>  addOrUpdateAlbum(
             @RequestBody Album album
     ) {
-        return ResponseEntity.ok().body(albumService.addOrUpdateAlbum(album));
+        Album savedAlbum = albumService.addOrUpdateAlbum(album);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedAlbum);
     }
 
     @DeleteMapping("/{id}")
