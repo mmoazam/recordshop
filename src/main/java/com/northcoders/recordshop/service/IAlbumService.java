@@ -1,9 +1,7 @@
 package com.northcoders.recordshop.service;
 
 import com.northcoders.recordshop.model.Album;
-import org.springframework.http.ResponseEntity;
 
-import java.net.http.HttpResponse;
 import java.util.List;
 
 public interface IAlbumService {
@@ -29,6 +27,10 @@ public interface IAlbumService {
     List<Album> getAllAlbumsInStock();
 
     List<Album> getAlbumsWithStockLevelLessThan(int level);
+
+    List<Album> getAlbumsWithStockLevelGreaterThan(int stockLevel);
+
+
 }
 
 /*

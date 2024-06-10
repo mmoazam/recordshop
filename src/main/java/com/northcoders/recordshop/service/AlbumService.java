@@ -4,10 +4,8 @@ import com.northcoders.recordshop.model.Album;
 import com.northcoders.recordshop.model.Genre;
 import com.northcoders.recordshop.repository.IAlbumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.net.http.HttpResponse;
 import java.util.List;
 
 @Service
@@ -60,7 +58,7 @@ public class AlbumService implements IAlbumService {
 
     @Override
     public Album updateAlbum(Album album) {
-        return null;
+        return albumRepository.save(album);
     }
 
 
@@ -79,4 +77,10 @@ public class AlbumService implements IAlbumService {
     public List<Album> getAlbumsWithStockLevelLessThan(int level) {
         return albumRepository.findByStockLevelLessThan(level);
     }
+
+    @Override
+    public List<Album> getAlbumsWithStockLevelGreaterThan(int stockLevel) {
+        return albumRepository.findByStockLevelGreaterThan(stockLevel);
+    }
+
 }

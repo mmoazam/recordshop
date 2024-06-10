@@ -3,6 +3,7 @@ package com.northcoders.recordshop.controller;
 import com.northcoders.recordshop.model.Album;
 import com.northcoders.recordshop.repository.IAlbumRepository;
 import com.northcoders.recordshop.service.IAlbumService;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -56,7 +57,7 @@ public class AlbumController {
         return  albumService.getAlbumByGenre(genre.toUpperCase());
     }
 
-    @GetMapping("/in_stock")
+    @GetMapping("/stock")
     public List<Album> getAlbumsInStock() {
         return  albumService.getAllAlbumsInStock();
     }
@@ -66,6 +67,14 @@ public class AlbumController {
             @PathVariable("stock_level") int stock_level
     ) {
         return  albumService.getAlbumsWithStockLevelLessThan(stock_level);
+    }
+
+
+    @GetMapping("/stock/")
+    public List<Album> getAlbumsByStockLevelAbove(
+            @RequestParam("stock_level_above" ) int stock_level_above
+    ) {
+        return  albumService.getAlbumsWithStockLevelGreaterThan(stock_level_above);
     }
 
     @PostMapping("")
@@ -87,4 +96,13 @@ public class AlbumController {
 
         return null;
     }
+
+    @PutMapping("")
+    public Album updateAlbum(
+            @RequestBody Album album
+    ) {
+        return albumService.updateAlbum(album);
+    }
+
+
 } // end of AlbumController
