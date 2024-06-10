@@ -3,10 +3,12 @@ package com.northcoders.recordshop.controller;
 import com.northcoders.recordshop.model.Album;
 import com.northcoders.recordshop.repository.IAlbumRepository;
 import com.northcoders.recordshop.service.IAlbumService;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -28,6 +30,17 @@ public class AlbumController {
     ) {
         return  albumService.getAlbumById(id);
     }
+
+
+    //////////////////////////////////
+
+
+
+
+
+
+    ///////////////////////////////////
+
 
     @GetMapping("/name/{name}")
     public List<Album> getAlbumByName(

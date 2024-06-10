@@ -28,7 +28,7 @@ public class AlbumService implements IAlbumService {
 
     @Override
     public Album getAlbumById(String number) {
-        return albumRepository.findById(Long.parseLong(number)).orElse(null);
+        return albumRepository.findById(Long.parseLong(number)).orElseThrow(() -> new IllegalArgumentException("Album with Id " + number + " not found"));
     }
 
     @Override
