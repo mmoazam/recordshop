@@ -20,5 +20,6 @@ public enum Genre {
     SOUL,
     PUNK,
     NEWAGE,
-    DISCO
+    DISCO,
+    OTHER
 }

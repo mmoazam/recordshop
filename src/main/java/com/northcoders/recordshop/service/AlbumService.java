@@ -85,4 +85,20 @@ public class AlbumService implements IAlbumService {
         return albumRepository.findByStockLevelGreaterThan(stockLevel);
     }
 
+    @Override
+    public Album addOrUpdateAlbum(Album album) {
+        if(album.getStockLevel() < 0) {
+            throw new IllegalArgumentException("Stock level cannot be less than 0");
+        }
+        if(album.getReleaseYear() < 0) {
+            throw new IllegalArgumentException("Release year cannot be less than 0");
+        }
+
+        if(album.getGenre() == null) {
+            album.setGenre(Genre.OTHER);
+        }
+
+        return albumRepository.save(album);
+    }
+
 }

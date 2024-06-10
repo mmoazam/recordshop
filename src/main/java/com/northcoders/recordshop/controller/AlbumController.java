@@ -83,10 +83,10 @@ public class AlbumController {
     }
 
     @PostMapping("")
-    public Album createAlbum(
+    public Album addOrUpdateAlbum(
             @RequestBody Album album
     ) {
-        return albumService.createAlbum(album);
+        return albumService.addOrUpdateAlbum(album);
     }
 
     @DeleteMapping("/{id}")
