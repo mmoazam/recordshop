@@ -36,7 +36,6 @@ public interface IAlbumService {
 
     Album addOrUpdateAlbum(Album album);
 
-
     @Transactional
     Optional<Album> updateAlbum(Long id, Map<String, Object> updates);
 }

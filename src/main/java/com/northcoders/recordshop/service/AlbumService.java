@@ -103,12 +103,13 @@ public class AlbumService implements IAlbumService {
         if(album.getStockLevel() < 0) {
             throw new IllegalArgumentException("Stock level cannot be less than 0");
         }
-        if(album.getReleaseYear() < 0) {
-            throw new IllegalArgumentException("Release year cannot be less than 0");
+        if(album.getReleaseYear() < 1900) {
+            throw new IllegalArgumentException("Release year cannot be less than 1900");
         }
 
         if(album.getGenre() == null) {
-            album.setGenre(Genre.OTHER);
+            throw new IllegalArgumentException("Genre is mandatory");
+           // album.setGenre(Genre.OTHER);
         }
 
         return albumRepository.save(album);

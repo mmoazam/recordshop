@@ -33,9 +33,11 @@ public class Album {
     private String artist;
 
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "Genre is mandatory")
     private Genre genre;
 
-    @NotNull(message = "Genre is mandatory")
+    @NotNull(message = "Release year is mandatory")
+    @Min(value = 1900, message = "Release year cannot be less than 1900")
     private int releaseYear;
 
     @Min(value = 0, message = "Stock level cannot be less than 0")
