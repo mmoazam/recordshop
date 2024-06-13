@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class AlbumServiceTest {
@@ -171,10 +171,25 @@ class AlbumServiceTest {
 
     @Test
     void updateAlbum() {
+        Album album = new Album();
+        album.setId(1L);
+        album.setName("Album 1");
+        album.setArtist("Artist 1");
+        album.setStockLevel(10);
+        album.setReleaseYear(2000);
+        album.setDescription("Album 1 description");
+        album.setGenre(Genre.ROCK);
+        albumService.updateAlbum(album);
+        album.setName("Album 2");
+        albumService.updateAlbum(album);
+
+        verify(albumRepository, times(2)).save(album);
+        assertEquals("Album 2", album.getName());
     }
 
     @Test
     void deleteAlbumById() {
+
     }
 
     @Test
