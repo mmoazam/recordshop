@@ -189,7 +189,21 @@ class AlbumServiceTest {
 
     @Test
     void deleteAlbumById() {
+        Album album = new Album();
+        album.setId(1L);
+        album.setName("Album 1");
+        album.setArtist("Artist 1");
+        album.setStockLevel(10);
+        album.setReleaseYear(2000);
+        album.setDescription("Album 1 description");
+        album.setGenre(Genre.ROCK);
 
+        when(albumRepository.existsById(1L)).thenReturn(true);
+        doNothing().when(albumRepository).deleteById(1L);
+
+        assertAll(
+                () -> albumService.deleteAlbumById(1L)
+        );
     }
 
     @Test
