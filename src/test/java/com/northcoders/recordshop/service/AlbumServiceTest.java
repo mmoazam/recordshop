@@ -208,6 +208,21 @@ class AlbumServiceTest {
 
     @Test
     void getAllAlbumsInStock() {
+        Album album = new Album();
+        album.setId(1L);
+        album.setName("Album 1");
+        album.setArtist("Artist 1");
+        album.setStockLevel(10);
+        album.setReleaseYear(2000);
+        album.setDescription("Album 1 description");
+        album.setGenre(Genre.ROCK);
+
+        when(albumRepository.findByStockLevelGreaterThan(0)).thenReturn(List.of(album));
+
+        List<Album> foundAlbums = albumService.getAllAlbumsInStock();
+        assertNotNull(foundAlbums);
+        assertEquals(1, foundAlbums.size());
+        assertEquals("Album 1", foundAlbums.getFirst().getName());
     }
 
     @Test
