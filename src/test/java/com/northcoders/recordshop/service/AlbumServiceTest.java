@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -26,15 +27,40 @@ class AlbumServiceTest {
     @Test
     void AlbumService_getAllAlbums_ReturnsAlbums() {
         // Arrange
+        Album album = new Album();
+        album.setId(1L);
+        album.setName("Album 1");
+        album.setArtist("Artist 1");
+        album.setStockLevel(10);
+        album.setReleaseYear(2000);
+        album.setDescription("Album 1 description");
+        album.setGenre(Genre.ROCK);
+        when(albumRepository.findAll()).thenReturn(List.of(album));
 
         // Act
         List<Album> albums = albumService.getAllAlbums();
         // Assert
         assertNotNull(albums);
+        assertEquals(1, albums.size());
+
     }
 
     @Test
     void getAlbumById() {
+        Album album = new Album();
+        album.setId(1L);
+        album.setName("Album 1");
+        album.setArtist("Artist 1");
+        album.setStockLevel(10);
+        album.setReleaseYear(2000);
+        album.setDescription("Album 1 description");
+        album.setGenre(Genre.ROCK);
+
+        when(albumRepository.findById(1L)).thenReturn(Optional.of(album));
+
+        Album foundAlbum = albumService.getAlbumById(1L);
+        assertNotNull(foundAlbum);
+        assertEquals("Album 1", foundAlbum.getName());
     }
 
     @Test
@@ -80,13 +106,46 @@ class AlbumServiceTest {
     }
 
     @Test
-    void getAlbumByArtist() {
+    void AlbumService_getAlbumByArtist_ReturnsAlbum() {
+        Album album = new Album();
+        album.setId(1L);
+        album.setName("Album 1");
+        album.setArtist("Artist 1");
+        album.setStockLevel(10);
+        album.setReleaseYear(2000);
+        album.setDescription("Album 1 description");
+        album.setGenre(Genre.ROCK);
 
+        when(albumRepository.findByArtistContainingIgnoreCase("artist")).thenReturn(List.of(album));
+
+        List<Album> foundAlbums = albumService.getAlbumByArtist("artist");
+
+        assertNotNull(foundAlbums);
+        assertEquals(1, foundAlbums.size());
+        assertEquals("Album 1", foundAlbums.getFirst().getName());
+        assertEquals("Artist 1", foundAlbums.getFirst().getArtist());
 
     }
 
     @Test
     void getAlbumByReleaseYear() {
+        Album album = new Album();
+        album.setId(1L);
+        album.setName("Album 1");
+        album.setArtist("Artist 1");
+        album.setStockLevel(10);
+        album.setReleaseYear(2000);
+        album.setDescription("Album 1 description");
+        album.setGenre(Genre.ROCK);
+
+
+        when(albumRepository.findByReleaseYear(2000)).thenReturn(List.of(album));
+
+        List<Album> foundAlbums = albumService.getAlbumByReleaseYear(2000);
+
+        assertNotNull(foundAlbums);
+        assertEquals(1, foundAlbums.size());
+        assertEquals("Album 1", foundAlbums.getFirst().getName());
     }
 
     @Test
