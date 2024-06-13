@@ -227,10 +227,22 @@ class AlbumServiceTest {
 
     @Test
     void getAlbumsWithStockLevelLessThan() {
+     Album album = new Album();
+
+        when(albumRepository.findByStockLevelLessThan(10)).thenReturn(List.of(album));
+
+        List<Album> foundAlbums = albumService.getAlbumsWithStockLevelLessThan(10);
+        assertNotNull(foundAlbums);
+        assertEquals(1, foundAlbums.size());
     }
 
     @Test
     void getAlbumsWithStockLevelGreaterThan() {
+        Album album = new Album();
+        when(albumRepository.findByStockLevelGreaterThan(10)).thenReturn(List.of(album));
+        List<Album> foundAlbums = albumService.getAlbumsWithStockLevelGreaterThan(10);
+        assertNotNull(foundAlbums);
+        assertEquals(1, foundAlbums.size());
     }
 
     @Test
