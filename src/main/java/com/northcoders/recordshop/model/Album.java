@@ -13,7 +13,7 @@ import lombok.*;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString
+@Builder
 @Table(name = "albums", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"name","artist"})
 })

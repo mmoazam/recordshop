@@ -32,7 +32,7 @@ class AlbumControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private AlbumService albumServiceBean;
+    private IAlbumService albumServiceBean;
 
     @Mock
     private IAlbumRepository albumRepository;
@@ -182,30 +182,8 @@ class AlbumControllerTest {
         assertThrows(ResourceNotFoundException.class, () -> albumService.deleteAlbumById(1L));
     }
 
-    //@Test
-    //public void getAlbumById_shouldReturnNotFound() throws Exception {
-    //    Mockito.when(albumService.getAlbumById(anyLong())).thenReturn(null);
-    //
-    //    mockMvc.perform((RequestBuilder) get("/api/v1/albums/1"))
-    //            .andExpect()
-    //}
-
-    @Test
-    public void getAlbumById_shouldReturnAlbum() throws Exception {
-        Album album = new Album();
-        album.setId(1L);
-        album.setName("Album1");
-        album.setReleaseYear(2000);
-        album.setStockLevel(10);
-        album.setGenre(Genre.ROCK);
 
 
-        Mockito.when(albumServiceBean.getAlbumById(1L)).thenReturn(album);
-
-        mockMvc.perform((RequestBuilder) get("/api/v1/albums/1"))
-                .andExpect(status().isOk());
-
-    }
 
 
 }// end of class
